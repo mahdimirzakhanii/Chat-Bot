@@ -41,7 +41,6 @@ const data = [
 const MainChat = () => {
   return (
     <div className="flex flex-col gap-10 items-center justify-center min-h-[90vh] w-full ">
-      <Image src="/image/logo.png" width={100} height={100} alt="logo" />
       <span className={`${geist1.className} text-7xl text-purple-300`}>
         ChatBot
       </span>
