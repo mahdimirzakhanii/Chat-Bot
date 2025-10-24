@@ -17,22 +17,25 @@ const data = [
     title: "Task Automation",
     desc: "lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.",
     icon: <TbAutomaticGearbox />,
-    color: "",
+    color: "#f2f",
   },
   {
     title: "Multi Language Support",
     desc: "lorem ipsum dolor s Quisquam, quod.",
     icon: <IoLanguageSharp />,
+    color: "#1222f1",
   },
   {
     title: "Image Generation",
     desc: "lorem ipsum dolor sit amet consectetur elit. Quisquam ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.",
     icon: <RiImageAiFill />,
+    color: "#161d",
   },
   {
     title: "Code Snippets",
     desc: "lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.",
     icon: <FaCode />,
+    color: "#822",
   },
 ];
 const MainChat = () => {
@@ -42,7 +45,7 @@ const MainChat = () => {
       <span className={`${geist1.className} text-7xl text-purple-300`}>
         ChatBot
       </span>
-      <div className="flex items-stretch justify-center gap-5 w-[80%] ">
+      <div className="flex items-stretch justify-center gap-5 w-[90%] ">
         <MagicBento
           data={data}
           textAutoHide={true}
