@@ -2,19 +2,51 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #090e21;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+@theme {
+  --color-pink-50: #fdf2f8;
+  --color-pink-100: #fce7f3;
+  --color-pink-200: #fad0e7;
+  --color-pink-300: #f8a9d3;
+  --color-pink-400: #f274b4;
+  --color-pink-500: #e94a96;
+  --color-pink-600: #d82a74;
+  --color-pink-700: #bb1b5a;
+  --color-pink-800: #9b194b;
+  --color-pink-900: #811a41;
+  --color-pink-950: #4f0823;
+
+  --color-purple-50: #faf5ff;
+  --color-purple-100: #f3e8ff;
+  --color-purple-200: #e8d5ff;
+  --color-purple-300: #d7b4fe;
+  --color-purple-400: #be84fc;
+  --color-purple-500: #a555f7;
+  --color-purple-600: #9033ea;
+  --color-purple-700: #7b22ce;
+  --color-purple-800: #6921a8;
+  --color-purple-900: #561c87;
+  --color-purple-950: #390764;
+
+  --color-blue-50: #ecf6ff;
+  --color-blue-100: #ddeeff;
+  --color-blue-200: #c1dfff;
+  --color-blue-300: #9cc9ff;
+  --color-blue-400: #74a8ff;
+  --color-blue-500: #5485ff;
+  --color-blue-600: #355ef6;
+  --color-blue-700: #284ada;
+  --color-blue-800: #2442af;
+  --color-blue-900: #253c8a;
+  --color-blue-950: #090e21;
+  --color-white: var(--foreground);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
+    --background: #090e21;
     --foreground: #ededed;
   }
 }
@@ -22,5 +54,4 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
 }
