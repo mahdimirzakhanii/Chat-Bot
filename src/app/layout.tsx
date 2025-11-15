@@ -24,9 +24,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`flex ${lato.className} items-center justify-center`}>
-        <div className="flex flex-col items-center justify-center gap-5 w-[95%] ">
+        <div className="flex flex-col items-center justify-center gap-5 w-[80%]">
           <Header />
+          <div className="flex flex-col items-center justify-start mt-20">
           {children}
+          </div>
         </div>
       </body>
     </html>

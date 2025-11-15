@@ -1,11 +1,10 @@
-import Image from "next/image";
-import React from "react";
 import { Barlow_Condensed } from "next/font/google";
 import { TbAutomaticGearbox } from "react-icons/tb";
 import { IoLanguageSharp } from "react-icons/io5";
 import { RiImageAiFill } from "react-icons/ri";
 import { FaCode } from "react-icons/fa6";
 import MagicBento from "../EffectCarts";
+import TextBox from "./TextBox";
 
 const geist1 = Barlow_Condensed({
   weight: "700",
@@ -40,24 +39,29 @@ const data = [
 ];
 const MainChat = () => {
   return (
-    <div className="flex flex-col gap-10 items-center justify-center min-h-[90vh] w-full ">
-      <span className={`${geist1.className} text-7xl text-purple-300`}>
-        ChatBot
-      </span>
-      <div className="flex items-stretch justify-center gap-5 w-[90%] ">
-        <MagicBento
-          data={data}
-          textAutoHide={true}
-          enableStars={true}
-          enableSpotlight={true}
-          enableBorderGlow={true}
-          enableTilt={true}
-          enableMagnetism={true}
-          clickEffect={true}
-          spotlightRadius={300}
-          particleCount={12}
-          glowColor="132, 0, 255"
-        />
+    <div className="flex flex-col gap-20 items-center justify-start min-h-[90vh] w-full ">
+      <div className="flex flex-col items-center w-full justify-center gap-10">
+        <span className={`${geist1.className} text-7xl text-purple-300`}>
+          ChatBot
+        </span>
+        <div className="flex items-stretch justify-center gap-5 w-full ">
+          <MagicBento
+            data={data}
+            textAutoHide={true}
+            enableStars={true}
+            enableSpotlight={true}
+            enableBorderGlow={true}
+            enableTilt={true}
+            enableMagnetism={true}
+            clickEffect={true}
+            spotlightRadius={300}
+            particleCount={12}
+            glowColor="132, 0, 255"
+          />
+        </div>
+      </div>
+      <div className="w-full flex flex-col items-center justify-center">
+        <TextBox />
       </div>
     </div>
   );
