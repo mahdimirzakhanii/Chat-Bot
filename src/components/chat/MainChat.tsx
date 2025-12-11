@@ -11,7 +11,7 @@ const geist1 = Barlow_Condensed({
   subsets: ["latin"],
 });
 
-const data = [
+const dataCart = [
   {
     title: "Task Automation",
     desc: "lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.",
@@ -37,16 +37,34 @@ const data = [
     color: "#822",
   },
 ];
-const MainChat = () => {
+const MainChat = async () => {
+  const res = await fetch(
+    `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=AIzaSyBOKRNwINS9649sK332a8IhSt2jqbYx_BQ`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        contents: [
+          {
+            parts: [{ text: "سلام" }],
+          },
+        ],
+      }),
+    }
+  );
+  const data = await res.json();
+
   return (
-    <div className="flex flex-col gap-20 items-center justify-start min-h-[90vh] w-full ">
+    <div className="flex flex-col gap-20 items-center justify-start min-h-[90vh] mt-20 w-full ">
       <div className="flex flex-col items-center w-full justify-center gap-10">
         <span className={`${geist1.className} text-7xl text-purple-300`}>
           ChatBot
         </span>
         <div className="flex items-stretch justify-center gap-5 w-full ">
           <MagicBento
-            data={data}
+            data={dataCart}
             textAutoHide={true}
             enableStars={true}
             enableSpotlight={true}

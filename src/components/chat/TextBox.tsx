@@ -12,8 +12,9 @@ const TextBox = () => {
       refTextBox.current.style.height = refTextBox.current.scrollHeight + "px";
     }
   }, [text]);
+  
   return (
-    <div className="w-1/2 flex items-center justify-center gap-2  border-b border-b-gray-600">
+    <div className="w-1/2 flex items-end pb-3 justify-center gap-2  border-b border-b-gray-600">
       <textarea
         ref={refTextBox}
         value={text}
