@@ -14,7 +14,6 @@ const lato = Lato({
   subsets: ["latin"],
 });
 
-// API Key: AIzaSyBOKRNwINS9649sK332a8IhSt2jqbYx_BQ
 
 export default function RootLayout({
   children,

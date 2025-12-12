@@ -39,8 +39,6 @@ const dataCart = [
 ];
 const MainChat = () => {
 
-  const apiKey = process.env.GEMINI_API_KEY;
-  
   return (
     <div className="flex flex-col gap-20 items-center justify-start min-h-[90vh] mt-20 w-full ">
       <div className="flex flex-col items-center w-full justify-center gap-10">
@@ -64,7 +62,7 @@ const MainChat = () => {
         </div>
       </div>
       <div className="w-full flex flex-col items-center justify-center">
-        <TextBox apiKey={apiKey}/>
+        <TextBox />
       </div>
     </div>
   );
