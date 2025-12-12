@@ -37,25 +37,10 @@ const dataCart = [
     color: "#822",
   },
 ];
-const MainChat = async () => {
-  const res = await fetch(
-    `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=AIzaSyBOKRNwINS9649sK332a8IhSt2jqbYx_BQ`,
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        contents: [
-          {
-            parts: [{ text: "سلام" }],
-          },
-        ],
-      }),
-    }
-  );
-  const data = await res.json();
+const MainChat = () => {
 
+  const apiKey = process.env.GEMINI_API_KEY;
+  
   return (
     <div className="flex flex-col gap-20 items-center justify-start min-h-[90vh] mt-20 w-full ">
       <div className="flex flex-col items-center w-full justify-center gap-10">
@@ -79,7 +64,7 @@ const MainChat = async () => {
         </div>
       </div>
       <div className="w-full flex flex-col items-center justify-center">
-        <TextBox />
+        <TextBox apiKey={apiKey}/>
       </div>
     </div>
   );
