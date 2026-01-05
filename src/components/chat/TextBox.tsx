@@ -44,7 +44,7 @@ const TextBox = () => {
  * **توسعه اپلیکیشن‌های موبایل (با React Native):** React Native به شما اجازه می‌دهد با استفاده از دانش React، اپلیکیشن‌های بومی برای iOS و Android بسازید.
 
    به طور خلاصه، React ابزاری قدرتمند و محبوب برای ساخت رابط‌های کاربری مدرن، تعاملی و کارآمد برای وب و موبایل است که به توسعه‌دهندگان کمک می‌کند برنامه‌های پیچیده را به روشی سازمان‌یافته و با عملکرد بالا بسازند.`;
-  const refTextBox = useRef(null);
+  const refTextBox = useRef<HTMLTextAreaElement>(null);
   const [text, setText] = useState("");
   const [resData, setResData] = useState<string>(text1);
 
@@ -69,6 +69,10 @@ const TextBox = () => {
     }
   };
 
+  // Detect Farsi Text
+  const textFn = /[\u0600-\u06FF]/.test(resData);
+
+  // Split Title
   const parts = resData.split(/(\*\*.*?\*\*)/g);
 
   return (
@@ -88,7 +92,7 @@ const TextBox = () => {
           <IoArrowUp />
         </div>
       </div>
-      <p className="leading-10 text-end">
+      <p className={`leading-10 ${textFn ? "text-right" : "text-left"} w-full`}>
         {parts.map((part, i) =>
           part.startsWith("**") && part.endsWith("**") ? (
             <span
