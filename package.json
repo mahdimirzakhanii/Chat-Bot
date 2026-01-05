@@ -9,6 +9,10 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@ai-sdk/google": "^3.0.1",
+    "@google/generative-ai": "^0.24.1",
+    "@nanostores/react": "github:ai/react",
+    "ai": "^6.0.3",
     "axios": "^1.13.2",
     "gsap": "^3.13.0",
     "next": "15.5.4",
