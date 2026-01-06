@@ -3,10 +3,16 @@ import { useEffect, useRef, useState } from "react";
 import { IoArrowUp } from "react-icons/io5";
 import axios from "axios";
 
+interface TextBoxProps {
+  req: string;
+  res: string[];
+}
+
 const TextBox = () => {
   const refTextBox = useRef<HTMLTextAreaElement>(null);
-  const [text, setText] = useState("");
-  const [resData, setResData] = useState<string | null>(null);
+  const [text, setText] = useState<string>("");
+
+  const [resData, setResData] = useState<TextBoxProps[]>([]);
 
   useEffect(() => {
     if (refTextBox.current) {
@@ -20,24 +26,54 @@ const TextBox = () => {
     const formData = {
       message: text,
     };
-    console.log(formData);
     try {
       const res = await axios.post("/api/chat", formData);
       console.log(res?.data);
-      setResData(res?.data?.candidates[0]?.content?.parts[0]?.text);
+      setResData((prev) => [
+        ...(prev ?? []),
+        {
+          req: text,
+          res: res?.data?.candidates[0]?.content?.parts[0]?.text?.split(
+            /(\*\*.*?\*\*)/g
+          ),
+        },
+      ]);
+      setText("");
     } catch (error) {
       console.log(error);
     }
   };
 
   // Detect Farsi Text
-  const textFn = /[\u0600-\u06FF]/.test(resData || "");
-
-  // Split Title
-  const parts = resData?.split(/(\*\*.*?\*\*)/g);
+  const textFn = /[\u0600-\u06FF]/.test(resData[resData?.length - 1]?.res[0]);
 
   return (
-    <div className="flex flex-col items-center justify-center gap-5 w-[90%] lg:w-full">
+    <div className="flex flex-col items-center justify-center gap-5 mb-96 w-[90%] lg:w-full">
+      <p
+        className={`leading-10  w-full flex flex-col 
+        ${textFn ? "text-right" : "text-left"} `}
+      >
+        {resData?.map((part, i) =>
+          part?.res?.[0]?.startsWith("**") && part?.res?.[0]?.endsWith("**") ? (
+            <div key={i} className="flex flex-col border-b border-b-gray-700 py-5">
+              <h1 className="text-lg font-bold ">{part?.req}</h1>
+              <span
+                key={i}
+                className="bg-red-400 mt-4 font-bold text-xl text-gray-900"
+              >
+                {part?.res?.[0]?.replace(/\*\*/g, "")}
+              </span>
+            </div>
+          ) : (
+            <div key={i} className="flex flex-col  border-b border-b-gray-700 last-of-type:border-none py-5">
+              <h1 className="text-lg font-bold ">{part?.req}</h1>
+              <span key={i} className="text-gray-300 text-lg">
+                {part?.res?.[0]}
+              </span>
+            </div>
+          )
+        )}
+      </p>
       <div className="w-full flex items-end pb-3 justify-center gap-2 border-b border-b-gray-600">
         <textarea
           ref={refTextBox}
@@ -53,22 +89,6 @@ const TextBox = () => {
           <IoArrowUp />
         </div>
       </div>
-      <p className={`leading-10 ${textFn ? "text-right" : "text-left"} w-full`}>
-        {parts?.map((part, i) =>
-          part.startsWith("**") && part.endsWith("**") ? (
-            <span
-              key={i}
-              className="block mt-4 font-bold text-xl text-gray-100"
-            >
-              {part.replace(/\*\*/g, "")}
-            </span>
-          ) : (
-            <span key={i} className="text-gray-300 text-lg">
-              {part}
-            </span>
-          )
-        )}
-      </p>
     </div>
   );
 };
