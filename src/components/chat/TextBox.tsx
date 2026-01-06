@@ -29,13 +29,13 @@ const TextBox = () => {
     try {
       const res = await axios.post("/api/chat", formData);
       console.log(res?.data);
+      const text = res?.data?.candidates?.[0]?.content?.parts?.[0]?.text;
+      if (!text) return;
       setResData((prev) => [
-        ...(prev ?? []),
+        ...prev,
         {
           req: text,
-          res: res?.data?.candidates[0]?.content?.parts[0]?.text?.split(
-            /(\*\*.*?\*\*)/g
-          ),
+          res: text?.split(/(\*\*.*?\*\*)/g),
         },
       ]);
       setText("");
@@ -45,7 +45,9 @@ const TextBox = () => {
   };
 
   // Detect Farsi Text
-  const textFn = /[\u0600-\u06FF]/.test(resData[resData?.length - 1]?.res[0]);
+  const textFn = /[\u0600-\u06FF]/.test(
+    resData[resData?.length - 1]?.res[0] || ""
+  );
 
   return (
     <div className="flex flex-col items-center justify-center gap-5 mb-96 w-[90%] lg:w-full">
@@ -55,7 +57,10 @@ const TextBox = () => {
       >
         {resData?.map((part, i) =>
           part?.res?.[0]?.startsWith("**") && part?.res?.[0]?.endsWith("**") ? (
-            <div key={i} className="flex flex-col border-b border-b-gray-700 py-5">
+            <div
+              key={i}
+              className="flex flex-col border-b border-b-gray-700 py-5"
+            >
               <h1 className="text-lg font-bold ">{part?.req}</h1>
               <span
                 key={i}
@@ -65,7 +70,10 @@ const TextBox = () => {
               </span>
             </div>
           ) : (
-            <div key={i} className="flex flex-col  border-b border-b-gray-700 last-of-type:border-none py-5">
+            <div
+              key={i}
+              className="flex flex-col  border-b border-b-gray-700 last-of-type:border-none py-5"
+            >
               <h1 className="text-lg font-bold ">{part?.req}</h1>
               <span key={i} className="text-gray-300 text-lg">
                 {part?.res?.[0]}
